@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+
+    "baseUrl": "src",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "types": ["reflect-metadata"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noImplicitAny": false,
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": false,
+    "noResolve": false,
+    "noUnusedParameters": false,
+    "noUnusedLocals": true,
+    "strictNullChecks": false
+  },
+  "include": ["src", "bin"],
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/setupTests.ts",
+    "src/__tests__",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "dist"
+  ]
+}

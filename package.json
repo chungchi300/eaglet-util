@@ -1,0 +1,48 @@
+{
+  "name": "eaglet-mail",
+  "version": "1.0.0",
+  "author": "jeffchung",
+  "scripts": {
+    "test": "npx --no-install  jest --watchAll  --runInBand",
+    "build":"npx tsc --declaration"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleDirectories": [
+      "src",
+      "node_modules"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "engines": {
+    "node": ">= 9"
+  },
+  "dependencies": {
+    "inversify": "4.13.0",
+    "npm": "^6.1.0",
+    "reflect-metadata": "0.1.12",
+    "sparkpost": "^2.1.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.2.3",
+    "chokidar": "^1.5.1",
+    "jest": "^22.4.0",
+    "should": "^8.3.0",
+    "supertest": "^1.2.0",
+    "ts-jest": "^22.4.6",
+    "ts-node": "^6.0.3",
+    "tsconfig-paths": "^3.3.2",
+    "typescript": "^2.8.3"
+  },
+  "license": "MIT"
+}
