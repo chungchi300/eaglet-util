@@ -1,10 +1,10 @@
 {
-  "name": "eaglet-mail",
+  "name": "eaglet-util",
   "version": "1.0.0",
   "author": "jeffchung",
   "scripts": {
     "test": "npx --no-install  jest --watchAll  --runInBand",
-    "build":"npx tsc --declaration"
+    "build": "npx tsc --declaration"
   },
   "jest": {
     "transform": {
