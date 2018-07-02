@@ -2,21 +2,23 @@
   "compilerOptions": {
     "outDir": "dist",
 
-    "baseUrl": "src",
     "target": "es5",
-    "lib": ["es6", "dom"],
-    "types": ["reflect-metadata"],
+    "lib": ["es5", "es6"],
+
     "module": "commonjs",
     "moduleResolution": "node",
-    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+    "sourceMap": true,
     "noImplicitAny": false,
-    "preserveConstEnums": true,
-    "suppressImplicitAnyIndexErrors": false,
-    "noResolve": false,
-    "noUnusedParameters": false,
-    "noUnusedLocals": false,
-    "strictNullChecks": false
+    "declaration": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": false,
+    "stripInternal": true,
+    "pretty": true,
+    "strictNullChecks": false,
+    "noUnusedLocals": false
   },
   "include": ["src", "bin"],
   "exclude": [
