@@ -1,53 +1,45 @@
 import { Container } from "inversify";
-import { MailConfig, MailService } from "../interface";
-import TYPE from "../type";
-import { EagletMailService } from "../EagletMailService";
-describe("Post", () => {
-  // it("sparkpost", async () => {
-  //   const myContainer = new Container();
-  //   let mailConfig: MailConfig = {
-  //     transaction: {
-  //       api: "6ca19d3a-aee4-447f-b3b7-ccd2b3983385",
-  //       options: {
-  //         sandbox: false
-  //       }
-  //     },
-  //     from: "chungchi300@hotmail.com",
-  //     type: "sparkpost"
-  //   };
-  //   myContainer.bind<MailConfig>(TYPE.mailConfig).toConstantValue(mailConfig);
 
-  //   myContainer.bind<MailService>(TYPE.mailService).to(EagletMailService);
+import TYPE from "../basicService/orm/type";
+import Util from "../basicService/orm/util";
+import {
+  ConnectionOptions,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column
+} from "typeorm";
+describe("DB", () => {
+  it("DB ", async () => {
+    let myContainer = new Container();
 
-  //   const mailService = myContainer.get<MailService>(TYPE.mailService);
-  //   console.log()
-  //   try {
-  //     await mailService.mail({ to: "jeff", html: "ddd", subject: "jeff" });
-  //     expect(false).toBe(true);
-  //   } catch (err) {
-  //     expect(true).toBe(true);
-  //   }
-  // });
-  it("log ", async () => {
-    const myContainer = new Container();
-    let mailConfig: MailConfig = {
-      transaction: {
-        api: "6ca19d3a-aee4-447f-b3b7-ccd2b3983385",
-        options: {
-          sandbox: false
-        }
-      },
-      from: "chungchi300@hotmail.com",
-      type: "log"
+    let databaseOption: ConnectionOptions = {
+      type: "mysql",
+      host: "localhost",
+      port: 3307,
+      username: "root",
+      password: "dockerPassword",
+      database: "crm",
+
+      synchronize: false,
+
+      logging: false
     };
-    myContainer.bind<MailConfig>(TYPE.mailConfig).toConstantValue(mailConfig);
 
-    myContainer.bind<MailService>(TYPE.mailService).to(EagletMailService);
+    @Entity()
+    class Post {
+      @PrimaryGeneratedColumn() id: number;
+      @Column({})
+      title: string;
+    }
+    myContainer
+      .bind<ConnectionOptions>(TYPE.config)
+      .toConstantValue(databaseOption);
+    myContainer.bind("entities").toConstantValue([Post]);
 
-    const mailService = myContainer.get<MailService>(TYPE.mailService);
-
-    // console.log("mail", Object.keys(mailService), mailService.mailConfig);
-    // console.log("the mail service", mailService);
-    await mailService.mail({ to: "jeff", html: "ddd", subject: "jeff" });
+    myContainer.bind(TYPE.util).to(Util);
+    const DB = myContainer.get<Util>(TYPE.util);
+    let connection = await DB.connect();
+    await DB.resetDatabase(true);
+    expect((await connection.manager.find(Post)).length).toBe(0);
   });
 });
